@@ -27,3 +27,5 @@ app/yarn-error.log*
 ##################################
 db.sqlite3
 learnapp/migrations
+learnapp/__pycache__
+learnet/__pycache__
