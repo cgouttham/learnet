@@ -1,38 +1,34 @@
 import graphene
 from graphene_django import DjangoObjectType
 
-from learnapp.models import UserModel
+from learnapp.models import Concept, Resource
 
-class UserType(DjangoObjectType):
+class ConceptType(DjangoObjectType):
     class Meta:
-        model = UserModel
+        model = Concept
+        fields = '__all__'
+
+class ResourceType(DjangoObjectType):
+    class Meta:
+        model = Resource
+        fields = '__all__'
 
 class Query(graphene.ObjectType):
-    people = graphene.List(UserType)
+    concepts = graphene.List(ConceptType)
+    resources = graphene.List(ResourceType)
+    concept = graphene.Field(ConceptType, id=graphene.Int())
 
-    def resolve_people(self, info):
-        return UserModel.objects.all()
+    def resolve_concepts(self, info):
+        return Concept.objects.all()
+    
+    def resolve_resources(self, info):
+        return Resource.objects.all()
+        
+    def resolve_concept(self, info, **kwargs):
+        id = kwargs.get('id')
+        if id is not None:
+            return Concept.objects.get(pk=id)
 
-class CreateUser(graphene.Mutation):
-    id = graphene.Int()
-    name = graphene.String()
-    last_name = graphene.String()
 
-    class Arguments:
-        name = graphene.String()
-        last_name = graphene.String()
 
-    def mutate(self, info, name, last_name):
-        user = UserModel(name=name, last_name=last_name)
-        user.save()
-
-        return CreateUser(
-            id=user.id,
-            name=user.name,
-            last_name=user.last_name,
-        )
-
-class Mutation(graphene.ObjectType):
-    create_user = CreateUser.Field()
-
-schema = graphene.Schema(query=Query, mutation=Mutation)
+schema = graphene.Schema(query=Query)
