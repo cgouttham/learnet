@@ -61,6 +61,7 @@ export function ConceptView(props) {
   // should handle loading status
   //if (loading) return (<p>Loading...</p>);
   const params = useParams();
+  const history = useHistory();
   console.log('params: ', params)
   const { data, loading } = useQuery(QUERY_CONCEPT, { variables: {id: params.conceptID}});
   if (loading) return (<p>Loading...</p>);
@@ -74,6 +75,7 @@ export function ConceptView(props) {
     <div>
       <p>Martin is a cool concept, number { props.concept } to be exact.</p>
       { resourceList }
+      <Button onClick={() => history.goBack()}>Go Back</Button>
     </div>
   )
 }

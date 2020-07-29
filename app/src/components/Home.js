@@ -8,16 +8,10 @@ import { useHistory, Link } from 'react-router-dom';
 
 export function Home() {
   
-
-    const list = data.concepts.map(({ id, title, description }) => (
-      <div key={ id }>
-        <Button><Link to={`/concept/${id}`}>Concept - { id }: { title } { description }</Link></Button>
-      </div>
-    ));
     return (
       <div>
-        <h1>Concepts List</h1>
-        {list}
+        <h1>Welcome to Learnet</h1>
+        <Button><Link to='/concepts/'>Find something to learn!</Link></Button>
       </div>
     )
   }
