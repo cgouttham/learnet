@@ -1,22 +1,20 @@
 import React, { useContext, useEffect } from 'react';
 import { Router, Route, Switch, Redirect } from 'react-router';
 import history from './utils/history';
-import Context from './utils/context';
 import { ConceptsView, ConceptView } from './components/Concept'
 
-const Routes = () => {
-    const context = useContext(Context)
-    return(
+export function Routes () {
+    return (
         <div>
-        <Router history={history} >
-            <div>
-                <Switch>
-                    <Route exact path='/' component={ConceptsView} />
-                    <Route exact path='/concepts' component={ConceptsView} />
-                    <Route path='/concept/:conceptID' component={ConceptView} />
-                </Switch>
-            </div>
-        </Router>
+            <Router history={history} >
+                <div>
+                    <Switch>
+                        <Route exact path='/'><ConceptsView/></Route>
+                        <Route exact path='/concepts'><ConceptsView/></Route>
+                        <Route path='/concept/:conceptID'><ConceptView/></Route>
+                    </Switch>
+                </div>
+            </Router>
         </div>
     )
 }

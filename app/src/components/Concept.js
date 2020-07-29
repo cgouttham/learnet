@@ -51,8 +51,6 @@ export function ConceptsView(props) {
       <h1>Concepts List</h1>
       {list}
     </div>
-    
-
   )
 }
 
