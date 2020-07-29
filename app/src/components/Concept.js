@@ -36,7 +36,6 @@ export function ConceptsView(props) {
   // Polling: provides near-real-time synchronization with your server
   // by causing a query to execute periodically at a specified interval
   const { data, loading } = useQuery(QUERY_CONCEPTS);
-  const history = useHistory();
 
   // should handle loading status
   if (loading) return (<p>Loading...</p>);
@@ -62,7 +61,6 @@ export function ConceptView(props) {
   //if (loading) return (<p>Loading...</p>);
   const params = useParams();
   const history = useHistory();
-  console.log('params: ', params)
   const { data, loading } = useQuery(QUERY_CONCEPT, { variables: {id: params.conceptID}});
   if (loading) return (<p>Loading...</p>);
   

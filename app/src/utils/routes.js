@@ -1,8 +1,8 @@
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
 import { Router, Route, Switch, Redirect } from 'react-router';
-import history from './utils/history';
-import { ConceptsView, ConceptView } from './components/Concept'
-import { Home } from './components/Home'
+import history from './history';
+import { ConceptsView, ConceptView } from '../components/Concept'
+import { Home } from '../components/Home'
 
 export function Routes () {
     return (
