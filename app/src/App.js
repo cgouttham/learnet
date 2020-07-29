@@ -2,6 +2,7 @@ import React from 'react';
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { LearnApp } from './LearnAppView'
+import { RoutesLearnApp } from './RoutesLearnApp'
 
 
 const client = new ApolloClient({
@@ -10,8 +11,11 @@ const client = new ApolloClient({
 
 const App = () => (
   <ApolloProvider client={client}>
-    <div>
+    {/* <div>
       <LearnApp/>
+    </div> */}
+    <div>
+      <RoutesLearnApp/>
     </div>
   </ApolloProvider>
 

@@ -2,6 +2,8 @@ import React from 'react';
 import { useQuery } from 'react-apollo';
 import { gql } from 'apollo-boost';
 import { Button } from '@material-ui/core';
+import { useParams } from 'react-router';
+import { useHistory, Link } from 'react-router-dom';
 
 
 
@@ -34,14 +36,14 @@ export function ConceptsView(props) {
   // Polling: provides near-real-time synchronization with your server
   // by causing a query to execute periodically at a specified interval
   const { data, loading } = useQuery(QUERY_CONCEPTS);
-  
+  const history = useHistory();
+
   // should handle loading status
   if (loading) return (<p>Loading...</p>);
-  console.log(data)
   // List out all concepts
   const list = data.concepts.map(({ id, title, description }) => (
     <div key={ id }>
-      <Button onClick={ () => props.setConcept(id) }>Concept - { id }: { title } { description }</Button>
+      <Button><Link to={`/concept/${id}`}>Concept - { id }: { title } { description }</Link></Button>
     </div>
   ));
   return (
@@ -60,10 +62,11 @@ export function ConceptView(props) {
   //const { data, loading } = useQuery(QUERY_CONCEPT, { pollInterval: 500 });
   // should handle loading status
   //if (loading) return (<p>Loading...</p>);
-  const { data, loading } = useQuery(QUERY_CONCEPT, { variables: {id: props.concept}});
+  const params = useParams();
+  console.log('params: ', params)
+  const { data, loading } = useQuery(QUERY_CONCEPT, { variables: {id: params.conceptID}});
   if (loading) return (<p>Loading...</p>);
-  console.log("DATA: ", data)
-
+  
   const resourceList = data.concept.resourceSet.map(({ id, title, description }) => (
     <div key={ id }>
       <p>Resource - { id }: Title: { title } Description: { description }</p>
@@ -73,7 +76,6 @@ export function ConceptView(props) {
     <div>
       <p>Martin is a cool concept, number { props.concept } to be exact.</p>
       { resourceList }
-      <Button onClick={ () => props.setConcept(null) }> Back to the concept list!</Button>
     </div>
   )
 }
