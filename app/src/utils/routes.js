@@ -1,9 +1,9 @@
 import React from 'react';
-import { Router, Route, Switch, Redirect } from 'react-router';
+import { Router, Route, Switch } from 'react-router';
 import history from './history';
-import { ConceptView } from '../components/Concept'
+import { ConceptView } from '../components/ConceptView'
 import { ConceptsView } from '../components/ConceptsView'
-import { Home } from '../components/Home'
+import { HomeView } from '../components/HomeView'
 
 export function Routes () {
     return (
@@ -11,7 +11,7 @@ export function Routes () {
             <Router history={history} >
                 <div>
                     <Switch>
-                        <Route exact path='/'><Home/></Route>
+                        <Route exact path='/'><HomeView/></Route>
                         <Route exact path='/concepts'><ConceptsView/></Route>
                         <Route path='/concept/:conceptID'><ConceptView/></Route>
                     </Switch>

@@ -1,45 +1,12 @@
 import React from 'react';
 import { useQuery } from 'react-apollo';
-import { gql } from 'apollo-boost';
 import { Button, Typography, Divider  } from '@material-ui/core';
 import { useParams } from 'react-router';
-import { useHistory } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-const QUERY_CONCEPT = gql`
-  query ConceptData($id: Int!) {
-    concept (id: $id) {
-      id
-      # Resources associated with concept.
-      resourceSet {
-        id
-        title
-        description
-      }
-      # Prerequisite for Concept
-      endConcept {
-          startConcept {
-            id
-            title
-          }
-      }
-      # Postrequisite for Concept
-      startConcept {
-          endConcept {
-            id
-            title
-          }
-      }
-    }
-  }
+import { Link, useHistory } from 'react-router-dom';
+import { QUERY_CONCEPT } from '../utils/gql_queries';
 
-  `;
 
 export function ConceptView(props) {
-  // Polling: provides near-real-time synchronization with your server
-  // by causing a query to execute periodically at a specified interval
-  //const { data, loading } = useQuery(QUERY_CONCEPT, { pollInterval: 500 });
-  // should handle loading status
-  //if (loading) return (<p>Loading...</p>);
   const params = useParams();
   const history = useHistory();
   const { data, loading } = useQuery(QUERY_CONCEPT, { variables: {id: params.conceptID}});
