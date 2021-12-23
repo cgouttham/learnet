@@ -5,5 +5,5 @@ from learnapp import models
 # Added a single comment for testing
 
 admin.site.register(models.Concept)
-admin.site.register(models.ConceptPrereq)
+admin.site.register(models.ConceptConnection)
 admin.site.register(models.Resource)

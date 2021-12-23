@@ -17,7 +17,7 @@ class Resource(models.Model):
     votes = models.IntegerField(default=0)
     concept =  models.ForeignKey(Concept, on_delete=models.CASCADE)
 
-class ConceptPrereq(models.Model):
-    concept = models.ForeignKey(Concept, related_name="concept", on_delete=models.CASCADE)
-    prereq = models.ForeignKey(Concept, related_name="prereq", on_delete=models.CASCADE)
+class ConceptConnection(models.Model):
+    start_concept = models.ForeignKey(Concept, related_name="start_concept", on_delete=models.CASCADE)
+    end_concept = models.ForeignKey(Concept, related_name="end_concept", on_delete=models.CASCADE)
 
